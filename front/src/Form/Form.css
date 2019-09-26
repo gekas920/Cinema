@@ -1,0 +1,103 @@
+.form{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-direction: column;
+    margin: 70px auto 0;
+    width: 400px;
+    border: 1px solid;
+    max-height: 1000px;
+}
+
+.form--inputblock{
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+}
+
+.input{
+    width: 100%;
+    height: 30px;
+    border-radius: 10px;
+    outline: none;
+    border: 2px solid rgba(78,106,253,0.8);
+    font-size: 15px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.input:first-child{
+    margin-top: -20px;
+}
+.input:last-child{
+    margin-bottom: 20px;
+}
+
+.switch{
+    width: 70%;
+    border-bottom: 2px solid;
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: space-between;
+}
+.switch--headers{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5px;
+    height: 100%;
+    width: 130px;
+    border: 1px solid rgba(0,0,0,0);
+}
+
+.switch--headers:hover{
+    cursor: pointer;
+}
+.switch--headers:first-child{
+    margin-left: 60px;
+    border-right: 2px solid;
+}
+
+.switch--headers:first-child:hover{
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    border-left: 1px solid;
+}
+
+.switch--headers:last-child:hover{
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    border-right: 1px solid;
+}
+
+.switch--headers:last-child{
+    margin-right: 60px;
+}
+
+
+.form--logo{
+    width: 50px;
+    height: 50px;
+    margin-right: 20px;
+}
+
+.form--header{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.form--button{
+    height: 30px;
+    width: 150px;
+    margin-bottom: 20px;
+    border: 2px solid #FCD24E;
+    outline: none;
+    border-radius: 10px;
+    background-color: #46bbe3;
+}
+
+.form--button:hover{
+    cursor: pointer;
+}
