@@ -1,33 +1,57 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css?family=Raleway&display=swap');
+
+body{
+  margin: 0;
+  font-family: 'Raleway', sans-serif;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.navbar{
+  background-color: rgba(78,106,253,0.8);
+  height: 60px;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.navbar ul{
+  display: flex;
+  list-style-type: none;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 100%;
+  height: 60px;
+  justify-content: space-between;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.navbar--logo{
+  width: 50px;
+  height: 50px;
+}
+
+.navbar--item{
+  width: 200px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.navbar--item:last-child{
+  margin-right: 50px;
+}
+
+.navbar--item:first-child{
+  margin-left: 200px;
+}
+
+.navbar--item li{
+  color:white;
+  filter: brightness(100%);
+}
+
+
+.navbar--item:hover{
+  background-color: rgba(78,106,253,1);
+  color:white;
 }

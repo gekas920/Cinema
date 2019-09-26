@@ -4,14 +4,27 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "tsc": "tsc"
+    "dev": "nodemon ./src/App.ts",
+    "tsc": "tsc",
+    "prod": "ts-node ./src/App.ts"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@types/express": "^4.17.1",
     "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.7.1",
+    "passport": "^0.4.0",
+    "sequelize": "^5.19.0",
+    "touch": "^3.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^12.7.5",
+    "eslint": "^6.4.0",
+    "eslint-plugin-import": "^2.18.2",
+    "nodemon": "^1.19.2",
+    "ts-node": "^8.4.1",
     "typescript": "^3.6.3"
   }
 }
