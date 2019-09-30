@@ -7,7 +7,8 @@ interface IState {
     login:string,
     password:string,
     email?:string,
-    username?:string,
+    firstName?:string,
+    secondName?:string,
     date?:string,
     clicked:boolean,
     value:string
@@ -20,7 +21,8 @@ class Form extends React.Component<IProps,IState>{
         this.state = {
             login:'',
             password:'',
-            username:'',
+            firstName:'',
+            secondName:'',
             email:'',
             date:'',
             clicked:false,
@@ -45,18 +47,31 @@ class Form extends React.Component<IProps,IState>{
         })
     };
 
-    sendData = ()=>{
-        BasicRequests.get('/first')
-            .catch(err=>{
-                console.log('123')
-            })
+    sendData = ()=> {
+        if (this.state.clicked) {
+            const userData = {
+                login: this.state.login,
+                password: this.state.password,
+                firstName: this.state.firstName,
+                secondName: this.state.secondName,
+                email: this.state.email,
+                date: this.state.date
+            };
+            BasicRequests.create('/createUser', userData)
+                .then(() => console.log('Send!'))
+        }
+        let arr = Array.from(document.querySelectorAll<HTMLInputElement>('.input'));
+        arr.forEach((elem)=>{
+            elem.value = ''
+        })
     };
 
     render(){
         let arr = [
-            <input className="input" placeholder="username" onChange = {this.handleChange("username")}/>,
-            <input className="input" placeholder="email" onChange={this.handleChange("email")}/>,
-            <input className="input" placeholder="date" type="date" onChange={this.handleChange("date")}/>,
+            <input className="input" placeholder="first name" onChange = {this.handleChange("firstName")} key = '1'/>,
+            <input className="input" placeholder="second name" onChange = {this.handleChange("secondName")} key = '2'/>,
+            <input className="input" placeholder="email" onChange={this.handleChange("email")} key = '3'/>,
+            <input className="input" placeholder="date" type="date" onChange={this.handleChange("date")} key = '4'/>,
             ];
         return(
             <div className="form">

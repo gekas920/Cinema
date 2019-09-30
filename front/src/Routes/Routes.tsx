@@ -10,6 +10,8 @@ class Routes extends React.Component{
             <Router>
                 <Navbar/>
                 <Route exact path = "/register" component = {Form}/>
+                <Route exact path = "/home" component = {Form}/>
+                <Route path="/:username" />
             </Router>
         );
     }
