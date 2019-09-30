@@ -15,11 +15,15 @@ app.use(bodyParser.urlencoded({extended:false}));
 mongoose.connect(db.mongoUrl,{useNewUrlParser:true,useUnifiedTopology:true}).then(()=>{
     console.log('ok');
 })
-    .catch(err=>console.log(err));
+    .catch((err: any)=>console.log(err));
 
 
 app.post('/createUser',(req:express.Request,res:express.Response)=>{
     UserService.Register(req.body,res);
+});
+
+app.get('/:username',(req:express.Request,res:express.Response)=>{
+    res.send('hello')
 });
 
 app.listen(3000, function () {
