@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'
+import mongoose, {Schema} from 'mongoose'
 
 const UserSchema = new mongoose.Schema({
    login:{
@@ -23,6 +23,10 @@ const UserSchema = new mongoose.Schema({
     },
     secondName:{
         type:String,
+        required:true
+    },
+    admin:{
+       type:Boolean,
         required:true
     }
 });

@@ -2,16 +2,30 @@ import React from "react";
 import './Form.css'
 import logo from '../Images/logo.png'
 import BasicRequests from "../Requests/Requests";
+import FormError from "./FormError";
+
+
+interface User{
+    login:string,
+    password:string,
+    email:string,
+    firstName:string,
+    secondName:string,
+    date:string,
+    admin:boolean
+}
+
 
 interface IState {
     login:string,
     password:string,
-    email?:string,
-    firstName?:string,
-    secondName?:string,
-    date?:string,
+    email:string,
+    firstName:string,
+    secondName:string,
+    date:string,
     clicked:boolean,
-    value:string
+    value:string,
+    error:string
 }
 
 interface IProps {}
@@ -26,7 +40,8 @@ class Form extends React.Component<IProps,IState>{
             email:'',
             date:'',
             clicked:false,
-            value:''
+            value:'',
+            error:''
         }
     }
 
@@ -35,16 +50,44 @@ class Form extends React.Component<IProps,IState>{
       this.setState({...this.state, [name]: event.target.value})
     };
 
+    clearInputs = ()=>{
+        let arr = Array.from(document.querySelectorAll<HTMLInputElement>('.input'));
+        arr.forEach((elem)=>{
+            elem.value = ''
+        })
+    };
+
     handleClick = ()=>{
         this.setState({
             clicked:true
-        })
+        });
+        this.clearInputs();
     };
 
     handleNoneClick = ()=>{
         this.setState({
             clicked:false
-        })
+        });
+        this.clearInputs()
+    };
+
+    validForm = (user:User):boolean=>{
+        let ok:boolean = true;
+        Object.entries(user).forEach(
+            ([key,value])=>{
+                if(key === 'firstName')
+                    key = 'first name';
+                if(key === 'secondName')
+                    key = 'second name';
+                if((!value || value.length < 5) && typeof(value) !== 'boolean'){
+                    ok=false;
+                    this.setState({
+                        error:`${key} is too short`
+                    })
+                }
+            }
+        );
+        return ok;
     };
 
     sendData = ()=> {
@@ -55,15 +98,31 @@ class Form extends React.Component<IProps,IState>{
                 firstName: this.state.firstName,
                 secondName: this.state.secondName,
                 email: this.state.email,
-                date: this.state.date
+                date: this.state.date,
+                admin:false
             };
-            BasicRequests.create('/createUser', userData)
-                .then(() => console.log('Send!'))
+            let ok:boolean = this.validForm(userData);
+            if(ok){
+                BasicRequests.create('/createUser', userData)
+                    .then((res)=> {
+                        this.clearInputs();
+                        if (res.data === 'Already exist') {
+                            this.setState({
+                                error:'User already exist'
+                            });
+                        }
+                        this.clearInputs()
+                    });
+            }
+            setTimeout(()=>{
+                this.setState({
+                    error:''
+                })
+            },5000)
         }
-        let arr = Array.from(document.querySelectorAll<HTMLInputElement>('.input'));
-        arr.forEach((elem)=>{
-            elem.value = ''
-        })
+        else {
+            BasicRequests.create('/login',{login:this.state.login,password:this.state.password})
+        }
     };
 
     render(){
@@ -84,6 +143,7 @@ class Form extends React.Component<IProps,IState>{
                     <span className="switch--headers" onClick={this.handleClick}>Sign up</span>
                 </div>
                 <div className="form--inputblock">
+                    <FormError text={this.state.error}/>
                     <input className="input" placeholder="login" onChange = {this.handleChange("login")}/>
                     <input className="input" placeholder="password" type="password"
                            onChange={this.handleChange("password")}/>
