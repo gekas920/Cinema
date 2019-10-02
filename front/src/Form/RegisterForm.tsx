@@ -3,6 +3,7 @@ import './Form.css'
 import logo from '../Images/logo.png'
 import BasicRequests from "../Requests/Requests";
 import FormError from "./FormError";
+import {Redirect} from "react-router";
 
 
 interface User{
@@ -25,7 +26,8 @@ interface IState {
     date:string,
     clicked:boolean,
     value:string,
-    error:string
+    error:string,
+    ok:boolean
 }
 
 interface IProps {}
@@ -41,7 +43,8 @@ class Form extends React.Component<IProps,IState>{
             date:'',
             clicked:false,
             value:'',
-            error:''
+            error:'',
+            ok:false
         }
     }
 
@@ -114,15 +117,29 @@ class Form extends React.Component<IProps,IState>{
                         this.clearInputs()
                     });
             }
-            setTimeout(()=>{
-                this.setState({
-                    error:''
-                })
-            },5000)
         }
         else {
             BasicRequests.create('/login',{login:this.state.login,password:this.state.password})
+                .then((result)=>{
+                    if(result.data !== 'OK'){
+                        this.setState({
+                            error:result.data
+                        })
+                    }
+                    else {
+                        console.log(result.data);
+                        this.setState({
+                            ok:true
+                        })
+                    }
+                })
         }
+
+        setTimeout(()=>{
+            this.setState({
+                error:''
+            })
+        },5000)
     };
 
     render(){
@@ -132,26 +149,32 @@ class Form extends React.Component<IProps,IState>{
             <input className="input" placeholder="email" onChange={this.handleChange("email")} key = '3'/>,
             <input className="input" placeholder="date" type="date" onChange={this.handleChange("date")} key = '4'/>,
             ];
-        return(
-            <div className="form">
-                <div className="form--header">
-                <img className="form--logo" src={logo} alt="logo"/>
-                <h1>Partak</h1>
+        if(!this.state.ok){
+            return(
+                <div className="form">
+                    <div className="form--header">
+                        <img className="form--logo" src={logo} alt="logo"/>
+                        <h1>Partak</h1>
+                    </div>
+                    <div className="switch">
+                        <span className="switch--headers" onClick={this.handleNoneClick}>Log in</span>
+                        <span className="switch--headers" onClick={this.handleClick}>Sign up</span>
+                    </div>
+                    <div className="form--inputblock">
+                        <FormError text={this.state.error}/>
+                        <input className="input" placeholder="login" onChange = {this.handleChange("login")}/>
+                        <input className="input" placeholder="password" type="password"
+                               onChange={this.handleChange("password")}/>
+                        {this.state.clicked && arr}
+                    </div>
+                    <button className="form--button" onClick={this.sendData}>{this.state.clicked ? <b>Sign up</b> : <b>Log in</b>}</button>
                 </div>
-                <div className="switch">
-                    <span className="switch--headers" onClick={this.handleNoneClick}>Log in</span>
-                    <span className="switch--headers" onClick={this.handleClick}>Sign up</span>
-                </div>
-                <div className="form--inputblock">
-                    <FormError text={this.state.error}/>
-                    <input className="input" placeholder="login" onChange = {this.handleChange("login")}/>
-                    <input className="input" placeholder="password" type="password"
-                           onChange={this.handleChange("password")}/>
-                    {this.state.clicked && arr}
-                </div>
-                <button className="form--button" onClick={this.sendData}>{this.state.clicked ? <b>Sign up</b> : <b>Log in</b>}</button>
-            </div>
-        )
+            )
+        }
+        else {
+            return <Redirect to='/home'/>
+        }
+
     }
 }
 

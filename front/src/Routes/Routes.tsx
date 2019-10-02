@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route} from "react-router-dom";
 import Form from "../Form/RegisterForm";
 import Navbar from "../Navbar/Navbar"
+import Home from "../Home/Home";
 
 
 class Routes extends React.Component{
@@ -10,8 +11,7 @@ class Routes extends React.Component{
             <Router>
                 <Navbar/>
                 <Route exact path = "/register" component = {Form}/>
-                <Route exact path = "/home" component = {Form}/>
-                <Route path="/:username" />
+                <Route exact path = "/home" component = {Home}/>
             </Router>
         );
     }

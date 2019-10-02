@@ -42,7 +42,11 @@ class Service {
         })
             .then((result:ExpressNamespace.User)=>{
                 if(result){
-                    Service.comparePasswords(body.password,result.password) ? response.send('OK') : response.send('FALSE')
+                    Service.comparePasswords(body.password,result.password) ? response.sendStatus(200)
+                        : response.send('Incorrect password')
+                }
+                else{
+                    response.send('Incorrect login')
                 }
             })
     }
