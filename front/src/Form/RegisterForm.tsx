@@ -4,6 +4,7 @@ import logo from '../Images/logo.png'
 import BasicRequests from "../Requests/Requests";
 import FormError from "./FormError";
 import {Redirect} from "react-router";
+import {} from 'jsonwebtoken'
 
 
 interface User{
@@ -121,13 +122,13 @@ class Form extends React.Component<IProps,IState>{
         else {
             BasicRequests.create('/login',{login:this.state.login,password:this.state.password})
                 .then((result)=>{
-                    if(result.data !== 'OK'){
+                    if (result.data === 'Incorrect password' || result.data === 'Incorrect login') {
                         this.setState({
                             error:result.data
-                        })
+                        });
                     }
                     else {
-                        console.log(result.data);
+                        localStorage.setItem('token',result.data);
                         this.setState({
                             ok:true
                         })
@@ -149,7 +150,7 @@ class Form extends React.Component<IProps,IState>{
             <input className="input" placeholder="email" onChange={this.handleChange("email")} key = '3'/>,
             <input className="input" placeholder="date" type="date" onChange={this.handleChange("date")} key = '4'/>,
             ];
-        if(!this.state.ok){
+        if(!(this.state.ok || localStorage.getItem('token'))){
             return(
                 <div className="form">
                     <div className="form--header">

@@ -8,10 +8,16 @@ let instance = axios.create({
     }
 });
 
+instance.interceptors.response.use((res)=> {
+    return res;
+},
+    error => {
+    console.log(error.response);
+    });
 
 
 class Requests{
-    private api:string = '';
+    private api:string = '/secured';
     public create(url:string,body:object):AxiosPromise<any>{
         return instance.post(url,body);
     }
@@ -26,6 +32,14 @@ class Requests{
 
     public delete(url:string):AxiosPromise<any>{
         return instance.delete(url)
+    }
+
+    public securedGet(url:string):AxiosPromise<any>{
+        return instance.get(this.api+url,{
+            headers:{
+                'Authorization':localStorage.getItem('token')
+            }
+        })
     }
 }
 

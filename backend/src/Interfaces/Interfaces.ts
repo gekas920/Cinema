@@ -6,7 +6,7 @@ namespace ExpressNamespace {
         date?:Date,
         firstName?:string,
         secondName?:string,
-        _id?:string
+        _id:string
     }
 }
 

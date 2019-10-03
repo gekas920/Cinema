@@ -8,7 +8,7 @@ const bCrypt = require('../bcrypt/bcryptConfig');
 
 class Service {
     private secretKey:string = 'Cinema';
-    private genToken(id:number){
+    private genToken(id:string){
         return jwt.sign({
             data: id
         }, this.secretKey, { expiresIn: '1h' });
@@ -42,7 +42,7 @@ class Service {
         })
             .then((result:ExpressNamespace.User)=>{
                 if(result){
-                    Service.comparePasswords(body.password,result.password) ? response.sendStatus(200)
+                    Service.comparePasswords(body.password,result.password) ? response.send(this.genToken(result._id))
                         : response.send('Incorrect password')
                 }
                 else{
