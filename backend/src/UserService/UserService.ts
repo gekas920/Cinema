@@ -51,6 +51,17 @@ class Service {
             })
     }
 
+    public checkUser(info:string,response:express.Response){
+        jwt.verify(info,'Cinema',((err:Error) => {
+            if(err){
+                response.send('Denied')
+            }
+            else{
+                response.send('Confirmed');
+            }
+        }));
+    }
+
 }
 
 const UserService = new Service();

@@ -10,7 +10,7 @@ class Home extends React.Component{
 
     render(){
         return(
-            <div>1231230812381-</div>
+            <div>123123081238121-</div>
         )
     }
 }

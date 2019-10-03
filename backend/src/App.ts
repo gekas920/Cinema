@@ -16,3 +16,7 @@ web.app.post('/login',(req:express.Request,res:express.Response)=>{
 web.app.get(secured + '/:id',(req:express.Request,res:express.Response)=>{
 });
 
+web.app.get('/check/:id',(req:express.Request,res:express.Response)=>{
+    UserService.checkUser(req.params.id,res);
+});
+
