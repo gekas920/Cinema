@@ -1,4 +1,4 @@
-import axios, {AxiosPromise} from 'axios'
+import axios, {AxiosError, AxiosPromise} from 'axios'
 
 let instance = axios.create({
     baseURL:'http://localhost:3000',
@@ -11,8 +11,13 @@ let instance = axios.create({
 instance.interceptors.response.use((res)=> {
     return res;
 },
-    error => {
-    console.log(error.response);
+    (error:AxiosError) => {
+    if(error.response){
+        if(error.response.status === 401){
+            localStorage.clear();
+            window.location.href = '/login'
+        }
+    }
     });
 
 

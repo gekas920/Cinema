@@ -4,7 +4,8 @@ import logo from '../Images/logo.png'
 import BasicRequests from "../Requests/Requests";
 import FormError from "./FormError";
 import {Redirect} from "react-router";
-import {} from 'jsonwebtoken'
+import {AppState} from "../Store/Types";
+import {connect} from "react-redux";
 
 
 interface User{
@@ -31,9 +32,9 @@ interface IState {
     ok:boolean
 }
 
-interface IProps {}
-class Form extends React.Component<IProps,IState>{
-    constructor(props:IProps){
+
+class Form extends React.Component<any,IState>{
+    constructor(props:any){
         super(props);
         this.state = {
             login:'',
@@ -46,7 +47,8 @@ class Form extends React.Component<IProps,IState>{
             value:'',
             error:'',
             ok:false
-        }
+        };
+        console.log(this.props);
     }
 
 
@@ -115,7 +117,19 @@ class Form extends React.Component<IProps,IState>{
                                 error:'User already exist'
                             });
                         }
-                        this.clearInputs()
+                        else {
+                            localStorage.setItem('token',res.data);
+                            this.setState({
+                                ok:true
+                            });
+                        }
+                        this.clearInputs();
+                        this.props.sendData({
+                            firstName:this.state.firstName,
+                            secondName:this.state.secondName,
+                            email:this.state.email,
+                            date:this.state.date
+                        });
                     });
             }
         }
@@ -131,7 +145,7 @@ class Form extends React.Component<IProps,IState>{
                         localStorage.setItem('token',result.data);
                         this.setState({
                             ok:true
-                        })
+                        });
                     }
                 })
         }
@@ -179,4 +193,21 @@ class Form extends React.Component<IProps,IState>{
     }
 }
 
-export default Form
+export default connect(
+    (state:AppState)=>{
+        return state
+    },
+    dispatch => ({
+        sendData:(state:AppState)=>{
+            dispatch({
+                type:'PUSH_STATE',
+                payload:{
+                    firstName:state.firstName,
+                    secondName:state.secondName,
+                    date:state.date,
+                    email:state.email
+                }
+            })
+        }
+    })
+)(Form)

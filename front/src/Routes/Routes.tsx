@@ -4,9 +4,7 @@ import Form from "../Form/RegisterForm";
 import Navbar from "../Navbar/Navbar"
 import Home from "../Home/Home";
 import {Provider} from "react-redux";
-import {createStore} from 'redux'
-import AllReducers from "../Store/Store";
-const store = createStore(AllReducers.Reduce);
+import {store} from "../Store/Store";
 
 
 class Routes extends React.Component{

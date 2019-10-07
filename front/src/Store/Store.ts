@@ -1,15 +1,26 @@
+import {AppState, GetStateAction, SendStateAction} from "./Types";
+import {createStore} from 'redux'
 
-interface Act {
-    type:string
-}
+const defState:AppState = {
+    firstName:'',
+    secondName:'',
+    date:'',
+    email:''
+};
 
-class Reducers {
-    public Reduce(state={},action:Act){
-        return state
+
+function Reducer(state=defState,action:GetStateAction|SendStateAction) {
+    if(action.type === 'PUSH_STATE'){
+        return{
+            firstName : action.payload.firstName,
+            secondName:action.payload.secondName,
+            email:action.payload.email,
+            date:action.payload.date
+        }
     }
+    return state
 }
 
 
-const AllReducers = new Reducers();
+export const store = createStore(Reducer);
 
-export default AllReducers
