@@ -62,4 +62,11 @@ body{
     width: 100px;
     font-size: 10px;
   }
+  .navbar--logo{
+    width: 25px;
+    height: 25px;
+  }
+  .navbar ul{
+    flex-wrap: nowrap;
+  }
 }

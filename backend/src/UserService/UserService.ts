@@ -51,15 +51,22 @@ class Service {
             })
     }
 
-    public checkUser(info:string,response:express.Response){
-        jwt.verify(info,'Cinema',((err:Error) => {
-            if(err){
-                response.send('Denied')
-            }
-            else{
-                response.send('Confirmed');
-            }
-        }));
+
+    public getInfo(id:string|undefined ,response:express.Response){
+        let info = jwt.decode(id);
+        if(info){
+            User.findById(info.data)
+                .then((result:ExpressNamespace.User)=>{
+                    let userData:ExpressNamespace.UserData = {
+                        firstName : result.firstName,
+                        secondName : result.secondName,
+                        email : result.email,
+                        admin : result.admin,
+                        date:result.date
+                    };
+                    response.send(userData);
+                })
+        }
     }
 
 }

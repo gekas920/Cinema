@@ -1,4 +1,4 @@
-import {AppState, GetStateAction, SendStateAction} from "./Types";
+import {Action, AppState} from "./Types";
 import {createStore} from 'redux'
 
 const defState:AppState = {
@@ -9,7 +9,7 @@ const defState:AppState = {
 };
 
 
-function Reducer(state=defState,action:GetStateAction|SendStateAction) {
+function Reducer(state=defState,action:Action) {
     if(action.type === 'PUSH_STATE'){
         return{
             firstName : action.payload.firstName,
@@ -17,6 +17,10 @@ function Reducer(state=defState,action:GetStateAction|SendStateAction) {
             email:action.payload.email,
             date:action.payload.date
         }
+    }
+
+    if(action.type === 'CLEAR_STORE'){
+        return defState
     }
     return state
 }

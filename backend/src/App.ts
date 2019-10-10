@@ -13,10 +13,10 @@ web.app.post('/login',(req:express.Request,res:express.Response)=>{
     UserService.LogIn(req.body,res);
 });
 
-web.app.get(secured + '/:id',(req:express.Request,res:express.Response)=>{
+web.app.get(secured + '/getInfo',(req:express.Request,res:express.Response)=>{
+    const id:string | undefined = req.headers.authorization;
+    UserService.getInfo(id,res);
 });
 
-web.app.get('/check/:id',(req:express.Request,res:express.Response)=>{
-    UserService.checkUser(req.params.id,res);
-});
+
 

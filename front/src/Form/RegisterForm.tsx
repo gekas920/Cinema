@@ -32,9 +32,17 @@ interface IState {
     ok:boolean
 }
 
+interface IProps {
+    firstName:string,
+    secondName:string,
+    date:string,
+    email:string,
+    sendData:any
+}
 
-class Form extends React.Component<any,IState>{
-    constructor(props:any){
+
+class Form extends React.Component<IProps,IState>{
+    constructor(props:IProps){
         super(props);
         this.state = {
             login:'',
@@ -48,7 +56,6 @@ class Form extends React.Component<any,IState>{
             error:'',
             ok:false
         };
-        console.log(this.props);
     }
 
 

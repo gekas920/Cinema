@@ -15,7 +15,7 @@ instance.interceptors.response.use((res)=> {
     if(error.response){
         if(error.response.status === 401){
             localStorage.clear();
-            window.location.href = '/login'
+            window.location.href = '/register'
         }
     }
     });
