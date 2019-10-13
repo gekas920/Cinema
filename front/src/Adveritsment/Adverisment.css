@@ -1,0 +1,42 @@
+.all-table{
+    max-width: 1000px;
+}
+.table--row{
+    margin-left: 5%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    border-right: 1px solid;
+    border-top: 1px solid;
+    font-size: 15px;
+}
+.table--row > div{
+     flex-grow: 1;
+     width: 300px;
+     display:flex;
+    align-items: center;
+    justify-content: center;
+ }
+
+.table--row > div{
+    border-left: 1px solid;
+}
+
+.table--row:last-child{
+    border-bottom: 1px solid;
+}
+
+.first-row{
+    height: 50px;
+}
+
+.first-row div:first-child{
+
+}
+
+
+
+
+
+
+

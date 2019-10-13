@@ -15,22 +15,64 @@ function mapStateToProps(state:AppState):AppState{
     }
 }
 
+interface IState {
+    first:boolean,
+    second:boolean,
+    third:boolean,
+    fourth:boolean
+}
 
 
 
+class Navbar extends React.Component<AppState,IState>{
 
-class Navbar extends React.Component<AppState>{
+    constructor(props:AppState){
+        super(props);
+        this.state = {
+            first:false,
+            second:false,
+            third:false,
+            fourth:false
+        }
+    }
 
+    handleClick = (name:keyof IState) => () =>{
+        this.setState({
+            first:false,
+            second:false,
+            third:false,
+            fourth:false,
+            [name]:true
+        })
+    };
 
     public render(){
         return(
             <div className="navbar">
                 <ul>
                     <img src={logo} alt = "logo" className="navbar--logo"/>
-                    <Link to='/' className="navbar--item"><li>1</li></Link>
-                    <Link to='/' className="navbar--item"><li>2</li></Link>
-                    <Link to='/' className="navbar--item"><li>3</li></Link>
-                    <Link to='/register' className="navbar--item">
+                    <Link to='/' className="navbar--item"
+                          onClick={this.handleClick("first")}
+                          style={this.state.first ?
+                              {borderBottom:'4px solid #FCD24E'} : {}}
+                    >
+                        <li>1</li></Link>
+                    <Link to='/' className="navbar--item"
+                          onClick={this.handleClick("second")}
+                          style={this.state.second ?
+                              {borderBottom:'4px solid #FCD24E'} : {}}
+                    >
+                        <li>2</li></Link>
+                    <Link to='/advertisment' className="navbar--item"
+                          onClick={this.handleClick("third")}
+                          style={this.state.third ?
+                              {borderBottom:'4px solid #FCD24E'} : {}}>
+                        <li>To advertisers</li></Link>
+                    <Link to='/register' className="navbar--item"
+                          onClick={this.handleClick("fourth")}
+                          style={this.state.fourth ?
+                              {borderBottom:'4px solid #FCD24E'} : {}}
+                    >
                         <li>{this.props.firstName ? this.props.firstName : 'Log in/sign up'}</li>
                     </Link>
                 </ul>

@@ -1,0 +1,48 @@
+.input-home
+  width: 100%
+  height: 30px
+  border-radius: 10px
+  outline: none
+  border: 2px solid rgba(78,106,253,0.8)
+  font-size: 15px
+  margin-top: 20px
+  text-align: center
+  &:focus
+    outline: none
+
+/* LABEL ======================================= */
+.label-home
+  color: #999
+  font-size: 17px
+  position: absolute
+  pointer-events: none
+  left: 10px
+  top: 0
+  transition: 0.2s ease all
+  -moz-transition: 0.2s ease all
+  -webkit-transition: 0.2s ease all
+
+/* active state */
+.input
+  &:focus ~ .label,
+  &:valid ~ .label
+    top: 0
+    font-size: 14px
+    color: #5264AE
+
+/* BOTTOM BARS ================================= */
+.bar
+  position: relative
+  display: block
+  width: 320px
+
+  &:before
+    left: 50%
+  &:after
+    right: 50%
+
+/* active state */
+.input-home:focus
+  ~ .bar:before,
+  ~ .bar:after
+    width: 50%

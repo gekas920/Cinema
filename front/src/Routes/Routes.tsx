@@ -5,6 +5,7 @@ import Navbar from "../Navbar/Navbar"
 import Home from "../Home/Home";
 import {Provider} from "react-redux";
 import {store} from "../Store/Store";
+import Advertisment from "../Adveritsment/Advertisment";
 
 
 class Routes extends React.Component{
@@ -15,6 +16,7 @@ class Routes extends React.Component{
                 <Navbar/>
                 <Route exact path = "/register" component = {Form}/>
                 <Route exact path = "/home" component = {Home}/>
+                <Route exact path = "/advertisment" component = {Advertisment}/>
             </Router>
             </Provider>
         );

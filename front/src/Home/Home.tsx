@@ -2,6 +2,7 @@ import React from "react";
 import BasicRequests from "../Requests/Requests";
 import {connect} from "react-redux";
 import {AppState} from "../Store/Types";
+import './Home.sass'
 import './Home.css'
 
 
@@ -46,6 +47,16 @@ class Home extends React.Component<IProps,IState>{
             })
     }
 
+    inpFunc = (correctLabel:string,value:string)=>{
+        return(
+            <div className="group">
+                <input className='input-home' value={value} readOnly/>
+                <span className="bar"></span>
+                <label className='label-home'>{correctLabel}</label>
+            </div>
+        )
+    };
+
     handleClick = ()=>{
       localStorage.clear();
       this.props.clearStore();
@@ -56,10 +67,10 @@ class Home extends React.Component<IProps,IState>{
         return(
             <div className='home-content'>
                 <h1>User Info</h1>
-                <input value={this.state.firstName} className='home--input' readOnly={true}/>
-                <input value={this.state.secondName} className='home--input' readOnly={true}/>
-                <input value={this.state.email} className='home--input' readOnly={true}/>
-                <input value={this.state.date} className='home--input' readOnly={true}/>
+                {this.inpFunc('first name',this.state.firstName)}
+                {this.inpFunc('second name',this.state.secondName)}
+                {this.inpFunc('email',this.state.email)}
+                {this.inpFunc('date',this.state.date)}
                 <button className='home--button' onClick={this.handleClick}>Log out</button>
             </div>
         )

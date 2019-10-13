@@ -6,7 +6,8 @@ import FormError from "./FormError";
 import {Redirect} from "react-router";
 import {AppState} from "../Store/Types";
 import {connect} from "react-redux";
-
+import './Form.sass'
+import './Form.css'
 
 interface User{
     login:string,
@@ -59,7 +60,7 @@ class Form extends React.Component<IProps,IState>{
     }
 
 
-    handleChange = (name:keyof IState) => (event:React.ChangeEvent<HTMLInputElement>) => {
+    handleChange = (name: string) => (event:React.ChangeEvent<HTMLInputElement>) => {
       this.setState({...this.state, [name]: event.target.value})
     };
 
@@ -164,12 +165,22 @@ class Form extends React.Component<IProps,IState>{
         },5000)
     };
 
+    inpFunc = (changeName:string,correctLabel?:string,type?:string)=>{
+        return(
+            <div className="group">
+                <input className='input' onChange = {this.handleChange(changeName)} required type={type}/>
+                <span className="bar"></span>
+                <label className='label'>{correctLabel || changeName}</label>
+            </div>
+        )
+    };
+
     render(){
         let arr = [
-            <input className="input" placeholder="first name" onChange = {this.handleChange("firstName")} key = '1'/>,
-            <input className="input" placeholder="second name" onChange = {this.handleChange("secondName")} key = '2'/>,
-            <input className="input" placeholder="email" onChange={this.handleChange("email")} key = '3'/>,
-            <input className="input" placeholder="date" type="date" onChange={this.handleChange("date")} key = '4'/>,
+            this.inpFunc('firstName','first name'),
+            this.inpFunc('secondName','second name'),
+            this.inpFunc('email'),
+            this.inpFunc('','','date'),
             ];
         if(!(this.state.ok || localStorage.getItem('token'))){
             return(
@@ -184,9 +195,8 @@ class Form extends React.Component<IProps,IState>{
                     </div>
                     <div className="form--inputblock">
                         <FormError text={this.state.error}/>
-                        <input className="input" placeholder="login" onChange = {this.handleChange("login")}/>
-                        <input className="input" placeholder="password" type="password"
-                               onChange={this.handleChange("password")}/>
+                        {this.inpFunc('login')}
+                        {this.inpFunc('password','','password')}
                         {this.state.clicked && arr}
                     </div>
                     <button className="form--button" onClick={this.sendData}>{this.state.clicked ? <b>Sign up</b> : <b>Log in</b>}</button>
