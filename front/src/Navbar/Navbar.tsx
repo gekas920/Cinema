@@ -4,6 +4,7 @@ import '../App.css'
 import logo from '../Images/logo.png'
 import {connect} from "react-redux";
 import {AppState} from "../Store/Types";
+import BasicRequests from "../Requests/Requests";
 
 
 function mapStateToProps(state:AppState):AppState{
@@ -19,7 +20,8 @@ interface IState {
     first:boolean,
     second:boolean,
     third:boolean,
-    fourth:boolean
+    fourth:boolean,
+    name:string
 }
 
 
@@ -32,8 +34,20 @@ class Navbar extends React.Component<AppState,IState>{
             first:false,
             second:false,
             third:false,
-            fourth:false
+            fourth:false,
+            name:''
         }
+    }
+
+    componentDidMount(): void {
+        BasicRequests.get(`/getName/${localStorage.getItem('token')}`)
+            .then(result=>{
+                if(result){
+                    this.setState({
+                        name:result.data.firstName
+                    })
+                }
+            })
     }
 
     handleClick = (name:keyof IState) => () =>{
@@ -42,11 +56,12 @@ class Navbar extends React.Component<AppState,IState>{
             second:false,
             third:false,
             fourth:false,
-            [name]:true
+            [name]:true,
+            name:this.state.name
         })
     };
 
-    public render(){
+    render(){
         return(
             <div className="navbar">
                 <ul>
@@ -56,7 +71,7 @@ class Navbar extends React.Component<AppState,IState>{
                           style={this.state.first ?
                               {borderBottom:'4px solid #FCD24E'} : {}}
                     >
-                        <li>1</li></Link>
+                        <li>Affiche</li></Link>
                     <Link to='/' className="navbar--item"
                           onClick={this.handleClick("second")}
                           style={this.state.second ?
@@ -73,7 +88,7 @@ class Navbar extends React.Component<AppState,IState>{
                           style={this.state.fourth ?
                               {borderBottom:'4px solid #FCD24E'} : {}}
                     >
-                        <li>{this.props.firstName ? this.props.firstName : 'Log in/sign up'}</li>
+                        <li>{this.state.name || this.props.firstName ? this.state.name || this.props.firstName : 'Log in/sign up'}</li>
                     </Link>
                 </ul>
             </div>

@@ -7,3 +7,9 @@
 .container div {
     height: 800px;
 }
+
+@media screen and (max-width:1366px){
+    .container div{
+        height: 600px;
+    }
+}

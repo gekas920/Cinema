@@ -18,5 +18,9 @@ web.app.get(secured + '/getInfo',(req:express.Request,res:express.Response)=>{
     UserService.getInfo(id,res);
 });
 
+web.app.get('/getName/:token',(req:express.Request,res:express.Response)=>{
+    UserService.getInfo(req.params.token,res);
+});
+
 
 
