@@ -3,7 +3,6 @@ import BasicRequests from "../Requests/Requests";
 import {connect} from "react-redux";
 import {AppState} from "../Store/Types";
 import './Home.sass'
-import './Home.css'
 
 
 interface IProps{
@@ -37,13 +36,15 @@ class Home extends React.Component<IProps,IState>{
     componentDidMount(): void {
         BasicRequests.securedGet('/getInfo')
             .then(result=>{
-                this.props.sendData(result.data);
-                this.setState({
-                    firstName:result.data.firstName,
-                    secondName:result.data.secondName,
-                    date:new Date(result.data.date).toDateString(),
-                    email:result.data.email
-                });
+                if(result){
+                    this.props.sendData(result.data);
+                    this.setState({
+                        firstName:result.data.firstName,
+                        secondName:result.data.secondName,
+                        date:new Date(result.data.date).toDateString(),
+                        email:result.data.email
+                    });
+                }
             })
     }
 

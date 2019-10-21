@@ -6,6 +6,7 @@ import Home from "../Home/Home";
 import {Provider} from "react-redux";
 import {store} from "../Store/Store";
 import Advertisment from "../Adveritsment/Advertisment";
+import Footer from "../Footer/Footer";
 
 
 class Routes extends React.Component{
@@ -18,6 +19,7 @@ class Routes extends React.Component{
                 <Route exact path = "/home" component = {Home}/>
                 <Route exact path = "/advertisment" component = {Advertisment}/>
             </Router>
+                <Footer/>
             </Provider>
         );
     }

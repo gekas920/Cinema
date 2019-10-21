@@ -1,6 +1,5 @@
 import React from 'react'
-import './Form.css'
-
+import './Form.sass'
 
 interface IProps {
     text:string

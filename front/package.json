@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@types/cors": "^2.8.6",
     "@types/jsonwebtoken": "^8.3.4",
     "@types/react-redux": "^7.1.4",
     "@types/redux": "^3.6.0",

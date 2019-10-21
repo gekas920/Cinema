@@ -67,6 +67,8 @@ class Service {
                     response.send(userData);
                 })
         }
+        else
+            response.sendStatus(401);
     }
 
 }

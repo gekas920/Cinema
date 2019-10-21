@@ -1,5 +1,4 @@
 import React from "react";
-import './Form.css'
 import logo from '../Images/logo.png'
 import BasicRequests from "../Requests/Requests";
 import FormError from "./FormError";
@@ -7,7 +6,6 @@ import {Redirect} from "react-router";
 import {AppState} from "../Store/Types";
 import {connect} from "react-redux";
 import './Form.sass'
-import './Form.css'
 
 interface User{
     login:string,
