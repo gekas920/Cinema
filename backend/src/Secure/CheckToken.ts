@@ -6,6 +6,8 @@ module.exports = function (req:express.Request,res:express.Response,next:any) {
         if(err){
             res.sendStatus(401).end();
         }
-        next();
+        else {
+            next();
+        }
     })
 };

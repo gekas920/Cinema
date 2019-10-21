@@ -51,7 +51,7 @@ class Navbar extends React.Component<AppState,IState>{
             <div className="navbar">
                 <ul>
                     <img src={logo} alt = "logo" className="navbar--logo"/>
-                    <Link to='/' className="navbar--item"
+                    <Link to='/main' className="navbar--item"
                           onClick={this.handleClick("first")}
                           style={this.state.first ?
                               {borderBottom:'4px solid #FCD24E'} : {}}
