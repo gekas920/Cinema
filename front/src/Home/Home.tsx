@@ -3,6 +3,8 @@ import BasicRequests from "../Requests/Requests";
 import {connect} from "react-redux";
 import {AppState} from "../Store/Types";
 import './Home.sass'
+import * as CryptoJS from "crypto-js";
+import Menu from "./Menu";
 
 
 interface IProps{
@@ -19,8 +21,10 @@ interface IState {
     secondName:string,
     date:string,
     email:string,
-    admin:boolean
+    admin:boolean,
+    open:boolean
 }
+
 
 class Home extends React.Component<IProps,IState>{
     constructor(props:IProps){
@@ -30,13 +34,16 @@ class Home extends React.Component<IProps,IState>{
             secondName:'',
             date:'',
             email:'',
-            admin:false
+            admin:false,
+            open:false
         }
     }
     componentDidMount(): void {
         BasicRequests.securedGet('/getInfo')
             .then(result=>{
-                if(result){
+                if(result && result.data){
+                    let name = CryptoJS.AES.encrypt(result.data.firstName,'firstName');
+                    localStorage.setItem('data',name.toString());
                     this.props.sendData(result.data);
                     this.setState({
                         firstName:result.data.firstName,
@@ -45,7 +52,10 @@ class Home extends React.Component<IProps,IState>{
                         email:result.data.email
                     });
                 }
-            })
+                else {
+                    this.handleClick();
+                }
+            });
     }
 
     inpFunc = (correctLabel:string,value:string)=>{
@@ -61,18 +71,34 @@ class Home extends React.Component<IProps,IState>{
     handleClick = ()=>{
       localStorage.clear();
       this.props.clearStore();
-      window.location.href = '/register';
+      window.location.href = '/home';
     };
+
+    menuClick = () =>{
+      this.setState({
+          open:!this.state.open
+      });
+
+      let elem = document.querySelector('.home-menu');
+      if(elem){
+          elem.classList.toggle('active')
+      }
+    };
+
 
     render(){
         return(
-            <div className='home-content'>
-                <h1>User Info</h1>
-                {this.inpFunc('first name',this.state.firstName)}
-                {this.inpFunc('second name',this.state.secondName)}
-                {this.inpFunc('email',this.state.email)}
-                {this.inpFunc('date',this.state.date)}
-                <button className='home--button' onClick={this.handleClick}>Log out</button>
+            <div>
+                <button className='home-content-menuButton' onClick={this.menuClick}>Click</button>
+                <div className='home-content'>
+                  <h1>User Info</h1>
+                  {this.inpFunc('first name',this.state.firstName)}
+                  {this.inpFunc('second name',this.state.secondName)}
+                  {this.inpFunc('email',this.state.email)}
+                  {this.inpFunc('date',this.state.date)}
+                  <button className='home--button' onClick={this.handleClick}>Log out</button>
+              </div>
+                <Menu/>
             </div>
         )
     }

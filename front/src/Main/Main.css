@@ -1,15 +1,30 @@
 .container{
     display: flex;
     flex-direction: column;
-    max-height: 1000px;
 }
 
-.container div {
-    height: 800px;
+.container div{
+    height: 100%;
+}
+
+.container div img{
+    height: 100%;
+}
+
+
+.container div h1{
+    position: absolute;
+    color:red;
 }
 
 @media screen and (max-width:1366px){
     .container div{
         height: 600px;
+    }
+}
+
+@media screen and (max-width:700px){
+    .container div{
+        height: 400px;
     }
 }

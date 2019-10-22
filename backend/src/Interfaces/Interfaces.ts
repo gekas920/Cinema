@@ -17,6 +17,14 @@ namespace ExpressNamespace {
         email:string,
         admin:boolean
     }
+    
+    export interface FilmInfo {
+        name:string,
+        description:string,
+        actors:string,
+        genres:string,
+        link:string
+    }
 }
 
 export default ExpressNamespace

@@ -46,6 +46,14 @@ class Requests{
             }
         })
     }
+
+    public securedCreate(url:string,body:object):AxiosPromise<any>{
+        return instance.post(this.api+url,body,{
+            headers:{
+                'Authorization':localStorage.getItem('token')
+            }
+        })
+    }
 }
 
 const BasicRequests = new Requests();

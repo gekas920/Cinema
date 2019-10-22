@@ -16,7 +16,7 @@ class Routes extends React.Component{
             <Provider store={store}>
             <Router>
                 <Navbar/>
-                <Redirect from="/" to="/main" />
+                <Redirect from="/" to={window.location} />
                 <Route exact path = '/main' component = {Main}/>
                 <Route exact path = "/register" component = {Form}/>
                 <Route exact path = "/home" component = {Home}/>

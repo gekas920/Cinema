@@ -4,7 +4,8 @@ import '../App.css'
 import logo from '../Images/logo.png'
 import {connect} from "react-redux";
 import {AppState} from "../Store/Types";
-import BasicRequests from "../Requests/Requests";
+import * as CryptoJS from "crypto-js";
+import {WordArray} from "crypto-js";
 
 
 function mapStateToProps(state:AppState):AppState{
@@ -21,7 +22,6 @@ interface IState {
     second:boolean,
     third:boolean,
     fourth:boolean,
-    name:string
 }
 
 
@@ -35,20 +35,10 @@ class Navbar extends React.Component<AppState,IState>{
             second:false,
             third:false,
             fourth:false,
-            name:''
         }
     }
 
-    componentDidMount(): void {
-        BasicRequests.get(`/getName/${localStorage.getItem('token')}`)
-            .then(result=>{
-                if(result){
-                    this.setState({
-                        name:result.data.firstName
-                    })
-                }
-            })
-    }
+
 
     handleClick = (name:keyof IState) => () =>{
         this.setState({
@@ -57,8 +47,17 @@ class Navbar extends React.Component<AppState,IState>{
             third:false,
             fourth:false,
             [name]:true,
-            name:this.state.name
         })
+    };
+
+    getName = ():string => {
+        let info:string|WordArray|null = localStorage.getItem('data');
+        let plaintext:string = '';
+        if(info){
+            const bytes = CryptoJS.AES.decrypt(info, 'firstName');
+            plaintext = bytes.toString(CryptoJS.enc.Utf8);
+        }
+        return plaintext
     };
 
     render(){
@@ -88,7 +87,7 @@ class Navbar extends React.Component<AppState,IState>{
                           style={this.state.fourth ?
                               {borderBottom:'4px solid #FCD24E'} : {}}
                     >
-                        <li>{this.state.name || this.props.firstName ? this.state.name || this.props.firstName : 'Log in/sign up'}</li>
+                        <li>{this.getName() ? this.getName() : 'Log in/sign up'}</li>
                     </Link>
                 </ul>
             </div>
