@@ -5,7 +5,8 @@ const defState:AppState = {
     firstName:'',
     secondName:'',
     date:'',
-    email:''
+    email:'',
+    admin:false
 };
 
 
@@ -15,7 +16,8 @@ function Reducer(state=defState,action:Action) {
             firstName : action.payload.firstName,
             secondName:action.payload.secondName,
             email:action.payload.email,
-            date:action.payload.date
+            date:action.payload.date,
+            admin:action.payload.admin
         }
     }
 

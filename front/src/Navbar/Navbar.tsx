@@ -13,7 +13,8 @@ function mapStateToProps(state:AppState):AppState{
         firstName:state.firstName,
         secondName:state.secondName,
         date:state.date,
-        email:state.email
+        email:state.email,
+        admin:state.admin
     }
 }
 

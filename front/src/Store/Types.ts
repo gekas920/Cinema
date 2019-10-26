@@ -3,7 +3,8 @@ export interface AppState {
     firstName:string,
     secondName:string,
     date:string,
-    email:string
+    email:string,
+    admin:boolean
 }
 
 const GET_STATE = 'GET_STATE';

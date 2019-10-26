@@ -142,16 +142,18 @@ class Form extends React.Component<IProps,IState>{
         else {
             BasicRequests.create('/login',{login:this.state.login,password:this.state.password})
                 .then((result)=>{
-                    if (result.data === 'Incorrect password' || result.data === 'Incorrect login') {
-                        this.setState({
-                            error:result.data
-                        });
-                    }
-                    else {
-                        localStorage.setItem('token',result.data);
-                        this.setState({
-                            ok:true
-                        });
+                    if(result){
+                        if (result.data === 'Incorrect password' || result.data === 'Incorrect login') {
+                            this.setState({
+                                error:result.data
+                            });
+                        }
+                        else {
+                            localStorage.setItem('token',result.data);
+                            this.setState({
+                                ok:true
+                            });
+                        }
                     }
                 })
         }
@@ -202,7 +204,7 @@ class Form extends React.Component<IProps,IState>{
             )
         }
         else {
-            return <Redirect to='/home'/>
+            return <Redirect to='/home/userInfo'/>
         }
 
     }

@@ -8,6 +8,8 @@ import {store} from "../Store/Store";
 import Advertisment from "../Adveritsment/Advertisment";
 import Footer from "../Footer/Footer";
 import Main from "../Main/Main";
+import UserInfo from "../Home/UserInfo";
+import Films from "../Home/Films/Films";
 
 
 class Routes extends React.Component{
@@ -19,7 +21,9 @@ class Routes extends React.Component{
                 <Redirect from="/" to={window.location} />
                 <Route exact path = '/main' component = {Main}/>
                 <Route exact path = "/register" component = {Form}/>
-                <Route exact path = "/home" component = {Home}/>
+                <Route  path = "/home" component = {Home}/>
+                <Route exact path = '/home/userInfo' component = {UserInfo}/>
+                <Route exact path = '/home/films' component = {Films}/>
                 <Route exact path = "/advertisment" component = {Advertisment}/>
             </Router>
                 <Footer/>
