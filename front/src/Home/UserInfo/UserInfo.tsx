@@ -1,9 +1,9 @@
 import React from "react";
-import BasicRequests from "../Requests/Requests";
+import BasicRequests from "../../Requests/Requests";
 import * as CryptoJS from "crypto-js";
 import {connect} from "react-redux";
-import {AppState} from "../Store/Types";
-import './Home.sass'
+import {AppState} from "../../Store/Types";
+import '../Home.sass'
 
 interface IState {
     firstName:string,
@@ -50,7 +50,7 @@ class UserInfo extends React.Component<IProps,IState>{
     handleClick = ()=>{
         localStorage.clear();
         this.props.clearStore();
-        window.location.href = '/home';
+        window.location.href = '/register';
     };
     inpFunc = (correctLabel:string,value:string)=>{
         return(

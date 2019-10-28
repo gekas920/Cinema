@@ -1,6 +1,6 @@
 import React from "react";
 import './Home.sass'
-import Menu from "./Menu";
+import Menu from "./Menu/Menu";
 import icon from '../Images/ArrowIcon.png'
 
 
