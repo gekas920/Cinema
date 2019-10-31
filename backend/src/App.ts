@@ -25,7 +25,11 @@ web.app.get('/getName/:token',(req:express.Request,res:express.Response)=>{
 });
 
 web.app.post(secured + '/createFilm',(req:express.Request,res:express.Response)=>{
-   FilmService.createFilm(req.body);
+   FilmService.createFilm(req.body,res);
+});
+
+web.app.get(secured+'/films',(req:express.Request,res:express.Response)=>{
+    FilmService.ShowFilmsTable(res);
 });
 
 

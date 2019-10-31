@@ -1,0 +1,74 @@
+.group-create
+  position: relative
+
+.create-input
+  width: 70%
+  height: 30px
+  border-radius: 10px
+  outline: none
+  border: 2px solid rgba(78,106,253,0.8)
+  font-size: 15px
+  margin-top: 25px
+  text-align: center
+  &:focus
+    outline: none
+
+/* LABEL ======================================= */
+.create-label
+  color: #999
+  font-size: 17px
+  position: absolute
+  pointer-events: none
+  left: 55px
+  top: 33px
+  transition: 0.2s ease all
+  -moz-transition: 0.2s ease all
+  -webkit-transition: 0.2s ease all
+
+/* active state */
+.create-input
+  &:focus ~ .create-label,
+  &:valid ~ .create-label
+    top: 5px
+    font-size: 14px
+    color: #5264AE
+
+/* BOTTOM BARS ================================= */
+.bar-create
+  position: relative
+  display: block
+  width: 320px
+
+  &:before
+    left: 50%
+  &:after
+    right: 50%
+
+/* active state */
+.create-input:focus
+  ~ .bar:before,
+  ~ .bar:after
+    width: 50%
+
+.create-content
+  text-align: center
+  display: flex
+  flex-direction: column
+  justify-content: center
+
+.add-button
+  margin: 16px auto
+  width: 50%
+  height: 30px
+  border: none
+  outline: none
+  cursor: pointer
+  border-radius: 10px
+  display: flex
+  align-content: center
+  justify-content: center
+
+.add-result
+  margin-top: -6px
+.done-progress
+  margin: 0 auto

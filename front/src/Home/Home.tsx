@@ -1,7 +1,7 @@
 import React from "react";
 import './Home.sass'
 import Menu from "./Menu/Menu";
-import icon from '../Images/ArrowIcon.png'
+import {ArrowRightAlt} from "@material-ui/icons";
 
 
 class Home extends React.Component{
@@ -27,7 +27,7 @@ class Home extends React.Component{
         return(
             <div>
                 <button className='home-content-menuButton' onClick={this.menuClick}>
-                    <img src={icon} className='button-img'/>
+                    <ArrowRightAlt className='button-img'/>
                 </button>
                 <Menu/>
             </div>

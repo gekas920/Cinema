@@ -1,28 +1,16 @@
 import React from 'react';
 import MaterialTable from 'material-table';
+import Dialog from '@material-ui/core/Dialog';
+import * as Interfaces from '../HomeNamespaces'
+import BasicRequests from "../../Requests/Requests";
+import AddFilm from "./AddFilm";
 
-interface TableRow{
-    title:string,
-    actors:string,
-    description:string,
-    genres:string
-    // link:string,
-    // createdBy:string,
-    // tenant:string
-}
-interface TableHeaders{
-    title:string,
-    field:string
-}
-interface IProps {}
-interface IState {
-    columns:TableHeaders[],
-    current:TableRow,
-    data:TableRow[]
-}
 
-class Films extends React.Component<IProps,IState>{
-    constructor(props:IProps){
+
+
+
+class Films extends React.Component<Interfaces.FilmTableProps,Interfaces.FilmTableState>{
+    constructor(props:Interfaces.FilmTableProps){
         super(props);
         this.state = {
             columns:[
@@ -37,19 +25,48 @@ class Films extends React.Component<IProps,IState>{
                 description:'',
                 genres:'',
             },
-            data:[]
+            data:[
+                {title:'Joker',actors:'Joakin Phoenix',description:'aljdasjd;ladj;al',genres:'123123421'}
+            ],
+            open:false
         }
     }
 
+    tableData = ()=>{
+      BasicRequests.securedGet('/films');
+    };
+
+    createNew = ()=>{
+      this.setState({
+          open:true
+      })
+    };
+
+    rowClick = (event:any,rowData:any)=>{
+      this.setState({
+          open:true,
+          current:rowData
+      })
+    };
+
+    handleClose = ()=>{
+      this.setState({
+          open:false
+      })
+    };
+
     render(){
         return(
-            <div style={{display:'flex',justifyContent:'center'}}>
+            <div className='film-content'>
             <MaterialTable
                 style={{width:'70%'}}
                 title="My equipment"
                 columns={this.state.columns}
                 data={this.state.data}
+                onRowClick={this.rowClick}
             />
+            <div className='create-new' onClick={this.createNew}>Create equip</div>
+                <Dialog open={this.state.open} onClose={this.handleClose}><AddFilm/></Dialog>
             </div>
         )
     }

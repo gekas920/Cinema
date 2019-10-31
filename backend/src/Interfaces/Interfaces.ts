@@ -19,11 +19,13 @@ namespace ExpressNamespace {
     }
     
     export interface FilmInfo {
-        name:string,
+        title:string,
         description:string,
         actors:string,
         genres:string,
-        link:string
+        link:string,
+        createdBy:string,
+        tenant:string
     }
 }
 

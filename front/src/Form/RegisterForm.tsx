@@ -204,7 +204,7 @@ class Form extends React.Component<IProps,IState>{
             )
         }
         else {
-            return <Redirect to='/home/userInfo'/>
+            return <Redirect to='/home/user'/>
         }
 
     }
