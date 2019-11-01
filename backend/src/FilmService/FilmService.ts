@@ -6,18 +6,20 @@ const Film = require('../DataBase/Models/Film');
 
 class Service {
     public createFilm(body:ExpressNamespace.FilmInfo,res:express.Response){
-        console.log(body);
         const newFilm = new Film(body);
         newFilm.save()
             .then((result:ExpressNamespace.FilmInfo)=>{
                 res.send('done')
             })
+            .catch((err:Error)=>{
+                res.send('error')
+            })
     }
 
     public ShowFilmsTable(res:express.Response){
         Film.find()
-            .then((result:any)=>{
-                console.log(result);
+            .then((result:ExpressNamespace.FilmInfo[])=>{
+                res.send(result)
             })
     }
 }

@@ -4,9 +4,9 @@ export interface TableRow{
     actors:string,
     description:string,
     genres:string
-    link?:string,
-    createdBy?:string,
-    tenant?:string,
+    link:string,
+    createdBy:string,
+    tenant:string,
     done?:boolean,
     send?:boolean,
     error?:boolean
@@ -20,5 +20,6 @@ export interface FilmTableState {
     columns:TableHeaders[],
     current:TableRow,
     data:TableRow[],
-    open:boolean
+    open:boolean,
+    openRow:boolean
 }

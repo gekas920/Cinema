@@ -59,10 +59,13 @@ class AddFilm extends React.Component<IProps,Interfaces.TableRow>{
         BasicRequests.securedCreate('/createFilm',body)
             .then((result)=>{
                 if(result)
-                    console.log(result.data === 'done');
                     if(result.data === 'done')
                         this.setState({
                             done:true
+                        });
+                    if(result.data === 'error')
+                        this.setState({
+                            error:true
                         })
             })
     };
@@ -74,7 +77,7 @@ class AddFilm extends React.Component<IProps,Interfaces.TableRow>{
                    Add
                 </button>
             );
-        if(this.state.send && !this.state.done)
+        if(this.state.send && !this.state.done && !this.state.error)
             return (
                 <button className='add-button' onClick={this.sendData} disabled>
                     Wait...
@@ -83,13 +86,13 @@ class AddFilm extends React.Component<IProps,Interfaces.TableRow>{
         if(this.state.done)
             return (
                 <button className='add-button' onClick={this.sendData} disabled>
-                    <Done className='add-result'/> Done
+                    <Done className='add-done'/> Done
                 </button>
             );
         if(this.state.error)
             return (
                 <button className='add-button' onClick={this.sendData} disabled>
-                    <Error className='add-result'/> Error
+                    <Error className='add-err'/> Error
                 </button>
             )
     };
@@ -106,7 +109,7 @@ class AddFilm extends React.Component<IProps,Interfaces.TableRow>{
                 {this.inpFunc('Tenant','tenant')}
                 {this.inpFunc('Created By','createdBy')}
                 {this.returnButton()}
-                {this.state.send && !this.state.done &&
+                {this.state.send && !this.state.done && !this.state.error &&
                     <div>
                         <LinearProgress/>
                         <LinearProgress/>

@@ -17,24 +17,36 @@ class Films extends React.Component<Interfaces.FilmTableProps,Interfaces.FilmTab
                 {title:'Title',field:'title'},
                 {title:'Actors',field:'actors'},
                 {title:'Description',field:'description'},
-                {title:'Genres',field:'genres'}
+                {title:'Genres',field:'genres'},
+                {title:'Link',field:'link'},
+                {title:'Tenant',field:'tenant'},
+                {title:'Created By',field:'createdBy'}
             ],
             current:{
                 title:'',
                 actors:'',
                 description:'',
                 genres:'',
+                link:'',
+                createdBy:'',
+                tenant:''
             },
-            data:[
-                {title:'Joker',actors:'Joakin Phoenix',description:'aljdasjd;ladj;al',genres:'123123421'}
-            ],
-            open:false
+            data:[],
+            open:false,
+            openRow:false
         }
     }
 
-    tableData = ()=>{
-      BasicRequests.securedGet('/films');
-    };
+    componentDidMount(): void {
+        BasicRequests.securedGet('/films')
+            .then(result=>{
+                if(result){
+                    this.setState({
+                        data:result.data
+                    })
+                }
+            })
+    }
 
     createNew = ()=>{
       this.setState({
@@ -44,7 +56,7 @@ class Films extends React.Component<Interfaces.FilmTableProps,Interfaces.FilmTab
 
     rowClick = (event:any,rowData:any)=>{
       this.setState({
-          open:true,
+          openRow:true,
           current:rowData
       })
     };
@@ -59,13 +71,16 @@ class Films extends React.Component<Interfaces.FilmTableProps,Interfaces.FilmTab
         return(
             <div className='film-content'>
             <MaterialTable
+                options={{
+                    pageSizeOptions:[5,7,10]
+                }}
                 style={{width:'70%'}}
                 title="My equipment"
                 columns={this.state.columns}
                 data={this.state.data}
                 onRowClick={this.rowClick}
             />
-            <div className='create-new' onClick={this.createNew}>Create equip</div>
+            <div className='create-new' onClick={this.createNew}>Add film</div>
                 <Dialog open={this.state.open} onClose={this.handleClose}><AddFilm/></Dialog>
             </div>
         )
