@@ -16,9 +16,7 @@ class Films extends React.Component<Interfaces.FilmTableProps,Interfaces.FilmTab
             columns:[
                 {title:'Title',field:'title'},
                 {title:'Actors',field:'actors'},
-                {title:'Description',field:'description'},
                 {title:'Genres',field:'genres'},
-                {title:'Link',field:'link'},
                 {title:'Tenant',field:'tenant'},
                 {title:'Created By',field:'createdBy'}
             ],
@@ -58,21 +56,31 @@ class Films extends React.Component<Interfaces.FilmTableProps,Interfaces.FilmTab
       this.setState({
           openRow:true,
           current:rowData
-      })
+      });
     };
 
     handleClose = ()=>{
       this.setState({
-          open:false
-      })
+          open:false,
+          openRow:false
+      });
+        BasicRequests.securedGet('/films')
+            .then(result=>{
+                if(result){
+                    this.setState({
+                        data:result.data
+                    })
+                }
+            })
     };
 
     render(){
+        let arr = window.innerHeight < 720 ? [5] : [5,7,10];
         return(
             <div className='film-content'>
             <MaterialTable
                 options={{
-                    pageSizeOptions:[5,7,10]
+                    pageSizeOptions:arr
                 }}
                 style={{width:'70%'}}
                 title="My equipment"
@@ -82,6 +90,7 @@ class Films extends React.Component<Interfaces.FilmTableProps,Interfaces.FilmTab
             />
             <div className='create-new' onClick={this.createNew}>Add film</div>
                 <Dialog open={this.state.open} onClose={this.handleClose}><AddFilm/></Dialog>
+                <Dialog open={this.state.openRow} onClose = {this.handleClose}></Dialog>
             </div>
         )
     }
