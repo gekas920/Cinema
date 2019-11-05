@@ -5,11 +5,14 @@ export interface TableRow{
     description:string,
     genres:string
     link:string,
+    secondLink:string,
     createdBy:string,
     tenant:string,
     done?:boolean,
     send?:boolean,
-    error?:boolean
+    error?:boolean,
+    changes?:boolean,
+    doneErr?:boolean,
 }
 export interface TableHeaders{
     title:string,

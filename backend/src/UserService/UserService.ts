@@ -11,7 +11,7 @@ class Service {
     private genToken(id:string){
         return jwt.sign({
             data: id
-        }, this.secretKey, { expiresIn: '1h' });
+        }, this.secretKey, { expiresIn: '2d' });
     }
 
     private static comparePasswords(current:string, hash:string){

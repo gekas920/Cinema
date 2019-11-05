@@ -1,5 +1,5 @@
 import React from "react";
-import './AddFilm.sass'
+import './Film.sass'
 import * as Interfaces from "../HomeNamespaces";
 import {Done} from "@material-ui/icons";
 import {LinearProgress} from "@material-ui/core";
@@ -20,6 +20,7 @@ class AddFilm extends React.Component<IProps,Interfaces.TableRow>{
             genres:'',
             actors:'',
             link:'',
+            secondLink:'',
             createdBy:'',
             tenant:'',
             done:false,
@@ -53,6 +54,7 @@ class AddFilm extends React.Component<IProps,Interfaces.TableRow>{
            genres:this.state.genres,
            actors:this.state.actors,
            link:this.state.link,
+           secondLink:this.state.secondLink,
            createdBy:this.state.createdBy,
            tenant: this.state.tenant
        };
@@ -106,6 +108,7 @@ class AddFilm extends React.Component<IProps,Interfaces.TableRow>{
                 {this.inpFunc('Actors','actors')}
                 {this.inpFunc('Genres','genres')}
                 {this.inpFunc('Link','link')}
+                {this.inpFunc('Second link','secondLink')}
                 {this.inpFunc('Tenant','tenant')}
                 {this.inpFunc('Created By','createdBy')}
                 {this.returnButton()}

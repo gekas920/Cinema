@@ -21,6 +21,10 @@ const FilmSchema = new mongoose.Schema({
        type:String,
        required:true
     },
+    secondLink:{
+      type:String,
+      required:true
+    },
     createdBy:{
        type:String,
         required:true

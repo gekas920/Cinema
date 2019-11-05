@@ -4,6 +4,7 @@ import Dialog from '@material-ui/core/Dialog';
 import * as Interfaces from '../HomeNamespaces'
 import BasicRequests from "../../Requests/Requests";
 import AddFilm from "./AddFilm";
+import FilmData from "./FilmData";
 
 
 
@@ -26,6 +27,7 @@ class Films extends React.Component<Interfaces.FilmTableProps,Interfaces.FilmTab
                 description:'',
                 genres:'',
                 link:'',
+                secondLink:'',
                 createdBy:'',
                 tenant:''
             },
@@ -90,7 +92,9 @@ class Films extends React.Component<Interfaces.FilmTableProps,Interfaces.FilmTab
             />
             <div className='create-new' onClick={this.createNew}>Add film</div>
                 <Dialog open={this.state.open} onClose={this.handleClose}><AddFilm/></Dialog>
-                <Dialog open={this.state.openRow} onClose = {this.handleClose}></Dialog>
+                <Dialog open={this.state.openRow} onClose = {this.handleClose}>
+                    <FilmData {...this.state.current}/>
+                </Dialog>
             </div>
         )
     }

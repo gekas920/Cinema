@@ -4,7 +4,11 @@
 }
 
 .container div{
+    display: flex;
+    flex-direction: column;
     height: 100%;
+    justify-content: flex-end;
+    align-items: center;
 }
 
 .container div img{
@@ -14,8 +18,22 @@
 
 .container div h1{
     position: absolute;
-    color:red;
+    padding-left: 25px;
+    padding-right: 25px;
+    display: flex;
+    justify-content: center;
+    font-size: 55px;
+    color:white;
+    margin-top: -200px;
+    backdrop-filter: brightness(70%);
+    cursor: pointer;
+    transition-duration: .3s;
 }
+
+.container div h1:hover{
+    color:#FCD24E;
+}
+
 
 @media screen and (max-width:1366px){
     .container{
@@ -30,5 +48,9 @@
 @media screen and (max-width:700px){
     .container div{
         height: 400px;
+    }
+    .container div h1{
+        font-size: 35px;
+        margin-top: -50px;
     }
 }

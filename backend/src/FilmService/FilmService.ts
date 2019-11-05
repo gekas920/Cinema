@@ -22,6 +22,28 @@ class Service {
                 res.send(result)
             })
     }
+
+    public UpdateFilmInfo(body:ExpressNamespace.FilmInfo,res:express.Response){
+        Film.findOneAndUpdate({
+            title:body.title
+        },body)
+            .then((result:ExpressNamespace.FilmInfo|null)=>{
+                if(result)
+                    res.send('done');
+                else{
+                    res.send('error')
+                }
+            })
+    }
+
+    public DeleteFilm(title:string,res:express.Response){
+        Film.findOneAndDelete({
+            title:title
+        })
+            .then(()=>{
+                res.send('done')
+            })
+    }
 }
 
 const FilmService = new Service();

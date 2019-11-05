@@ -24,6 +24,10 @@ web.app.get('/getName/:token',(req:express.Request,res:express.Response)=>{
     UserService.getInfo(req.params.token,res);
 });
 
+web.app.get('/getFilmInfo',(req:express.Request,res:express.Response)=>{
+    FilmService.ShowFilmsTable(res);
+});
+
 web.app.post(secured + '/createFilm',(req:express.Request,res:express.Response)=>{
    FilmService.createFilm(req.body,res);
 });
@@ -31,6 +35,15 @@ web.app.post(secured + '/createFilm',(req:express.Request,res:express.Response)=
 web.app.get(secured+'/films',(req:express.Request,res:express.Response)=>{
     FilmService.ShowFilmsTable(res);
 });
+
+web.app.post(secured+'/updateInfo',(req:express.Request,res:express.Response)=>{
+   FilmService.UpdateFilmInfo(req.body,res);
+});
+
+web.app.delete(secured+'/deleteFilm/:title',(req:express.Request,res:express.Response)=>{
+    FilmService.DeleteFilm(req.params.title,res);
+});
+
 
 
 

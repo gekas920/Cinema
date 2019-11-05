@@ -20,6 +20,8 @@ mongoose.connect(db.mongoUrl,{useNewUrlParser:true,useUnifiedTopology:true}).the
 })
     .catch((err: any)=>console.log(err));
 
+mongoose.set('useFindAndModify', false);
+
 app.listen(3000, function () {
     console.log('Example app listening on port 3000!');
 });

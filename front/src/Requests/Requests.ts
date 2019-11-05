@@ -54,6 +54,22 @@ class Requests{
             }
         })
     }
+
+    public securedUpdate(url:string,body:object):AxiosPromise<any>{
+        return instance.post(this.api+url,body,{
+            headers:{
+                'Authorization':localStorage.getItem('token')
+            }
+        })
+    }
+
+    public securedDelete(url:string):AxiosPromise<any> {
+        return instance.delete(this.api + url,{
+            headers:{
+                'Authorization':localStorage.getItem('token')
+            }
+        });
+    }
 }
 
 const BasicRequests = new Requests();

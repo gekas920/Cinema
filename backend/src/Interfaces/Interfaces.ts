@@ -24,6 +24,7 @@ namespace ExpressNamespace {
         actors:string,
         genres:string,
         link:string,
+        secondLink:string,
         createdBy:string,
         tenant:string
     }
