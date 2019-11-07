@@ -27,8 +27,9 @@ class Routes extends React.Component{
                     <Route exact path = '/home/films' component = {Films}/>
                 </Route>
                 <Route exact path = "/advertisment" component = {Advertisment}/>
+                <Route path = '/main' component = {Footer}/>
+                <Route path = '/advertisment' component = {Footer}/>
             </Router>
-                <Footer/>
             </Provider>
         );
     }

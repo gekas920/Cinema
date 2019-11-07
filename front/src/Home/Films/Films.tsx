@@ -77,7 +77,7 @@ class Films extends React.Component<Interfaces.FilmTableProps,Interfaces.FilmTab
     };
 
     render(){
-        let arr = window.innerHeight < 720 ? [5] : [5,7,10];
+        let arr = window.innerHeight < 720 ? [5] : [5,7,20];
         return(
             <div className='film-content'>
             <MaterialTable

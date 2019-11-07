@@ -1,15 +1,19 @@
+import {FilmInfo} from "../Main/InterfacesMain";
 
 export interface AppState {
     firstName:string,
     secondName:string,
     date:string,
     email:string,
-    admin:boolean
+    admin:boolean,
+    filmArray?:FilmInfo[]
 }
+
 
 const GET_STATE = 'GET_STATE';
 const PUSH_STATE = 'PUSH_STATE';
 const CLEAR_STATE = 'CLEAR_STORE';
+const SEND_FILM_DATA = 'SEND_FILM_DATA';
 
 interface GetStateAction {
     type: typeof GET_STATE
@@ -24,4 +28,9 @@ interface ClearStateAction {
     type: typeof CLEAR_STATE
 }
 
-export type Action = GetStateAction | SendStateAction | ClearStateAction;
+interface SendFilmData {
+    type: typeof SEND_FILM_DATA
+    payload:FilmInfo[]
+}
+
+export type Action = GetStateAction | SendStateAction | ClearStateAction | SendFilmData;

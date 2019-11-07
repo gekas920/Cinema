@@ -14,7 +14,8 @@ function mapStateToProps(state:AppState):AppState{
         secondName:state.secondName,
         date:state.date,
         email:state.email,
-        admin:state.admin
+        admin:state.admin,
+        filmArray:[]
     }
 }
 
